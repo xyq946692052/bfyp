@@ -1,0 +1,8 @@
+*.pyc
+
+.idea
+db.sqlite3
+
+**/migrations/
+uwsgi.pid
+uwsgi.log
