@@ -4,5 +4,6 @@
 db.sqlite3
 
 **/migrations/
+uwsgi.ini
 uwsgi.pid
 uwsgi.log
