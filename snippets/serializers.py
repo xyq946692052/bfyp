@@ -9,20 +9,22 @@ class SnippetSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Snippet
-        fields = ('url', 'id', 'highlight', 'owner',
+        fields = ('id', 'url', 'created', 'updated', 'highlight', 'owner',
                   'title', 'code', 'linenos', 'language', 'style')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
+    pics = serializers.HyperlinkedRelatedField(many=True, view_name='pic-detail', read_only=True)
 
     class Meta:
         model = User
-        fields = ('url', 'id', 'username', 'snippets')
+        fields = ('url', 'id', 'username', 'snippets', 'pics')
 
 
 class PicSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = PicFile
-        fields = ('id', 'pic')
+        fields = ('id', 'url', 'created', 'updated', 'owner', 'pic')
 
