@@ -5,8 +5,8 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from snippets.permissions import IsOwnerOrReadOnly
-from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer, UserSerializer
+from snippets.models import Snippet, PicFile
+from snippets.serializers import SnippetSerializer, UserSerializer, PicSerializer
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
@@ -29,5 +29,13 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
+class PicViewSet(viewsets.ModelViewSet):
+    queryset = PicFile.objects.all()
+    serializer_class = PicSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 

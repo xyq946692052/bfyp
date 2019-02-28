@@ -35,3 +35,11 @@ class Snippet(models.Model):
         super(Snippet, self).save(*args, **kwargs)
 
 
+class PicFile(models.Model):
+    pic = models.ImageField(upload_to='images/')
+    owner = models.ForeignKey('auth.user', related_name='pics', on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        super(PicFile, self).save(*args, **kwargs)
+
+
