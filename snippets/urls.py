@@ -1,10 +1,7 @@
-from django.urls import path, re_path
-from django.conf import settings
-from django.views.static import serve
+from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import renderers
 from snippets.views import SnippetViewSet, UserViewSet, PicViewSet
-from snippets import views
 
 
 snippet_list = SnippetViewSet.as_view({
@@ -52,6 +49,6 @@ urlpatterns = [
     path('pics', pic_list, name='pic-list'),
     path('pics/<int:pk>', pic_detail, name='pic-detail'),
 
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -14,8 +14,15 @@ class SnippetSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
-    pics = serializers.HyperlinkedRelatedField(many=True, view_name='pic-detail', read_only=True)
+    snippets = serializers.HyperlinkedRelatedField(
+        many=True,
+        view_name='snippet-detail',
+        read_only=True)
+
+    pics = serializers.HyperlinkedRelatedField(
+        many=True,
+        view_name='pic-detail',
+        read_only=True)
 
     class Meta:
         model = User
